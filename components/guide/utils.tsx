@@ -1,0 +1,13 @@
+import { ReactNode } from 'react';
+
+// Helper function to parse simple markdown (bold, line breaks)
+export function parseMarkdown(text: string): ReactNode[] {
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+
+    return parts.map((part, i) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+            return <strong key={i} className="font-bold text-white">{part.slice(2, -2)}</strong>;
+        }
+        return <span key={i}>{part}</span>;
+    });
+}
